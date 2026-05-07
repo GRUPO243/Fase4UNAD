@@ -76,9 +76,3 @@ class Cliente(Persona):
     def get_cargo(self):
         return self.__cargo 
         
-        
-class Carro:
-    def __init__(self, marca, modelo, año):
-        self.marca = marca
-        self.modelo = modelo
-        self.año = año
