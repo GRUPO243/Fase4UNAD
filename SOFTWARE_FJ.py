@@ -27,7 +27,7 @@ class CargoError (Validaciones):
 
 
 #LE CAMBIEEEEEE ESTA LINEA
-
+#el computador no me quiere 
 
 
 
