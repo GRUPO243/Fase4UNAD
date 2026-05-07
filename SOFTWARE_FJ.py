@@ -67,3 +67,4 @@ class Cliente(Persona):
         
     def get_cargo(self):
         return self.__cargo 
+#me quiero ir dormir por favor copera
