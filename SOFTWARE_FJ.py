@@ -24,14 +24,6 @@ class EdadError (Validaciones):
 class CargoError (Validaciones):
     pass
 
-
-
-#LE CAMBIEEEEEE ESTA LINEA
-
-
-
-
-
 # A partir de esta linea se crea la clase abstracta (persona), que heredará a cliente sus atributos, en esta clase se realiza la validación correspondiente a (nombre) e (ID). Esta clase define la estructura base para cualquier individuo en el sistema y a su vez, no permite instanciación directa, (ABC). Gestiona la identidad (Nombre/ID)
 class Persona(ABC):
     def __init__(self, nombre, ID):
@@ -75,10 +67,3 @@ class Cliente(Persona):
         
     def get_cargo(self):
         return self.__cargo 
-        
-        
-class Carro:
-    def __init__(self, marca, modelo, año):
-        self.marca = marca
-        self.modelo = modelo
-        self.año = año
