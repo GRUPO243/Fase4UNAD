@@ -208,65 +208,83 @@ def calcular_costo_descuento(servicio, descuento = 0):
 
     return servicio.calcular_costo() * (1 - descuento)
 
-# PRUEBAS DEL SISTEMA
+# PRUEBA DE SERVICIOS
 
-# Estas pruebas permiten demostrar el funcionamiento
-# correcto del módulo de servicios y el manejo de errores.
+if __name__ == "__main__":
 
-try:
+    while True:
+        try:
+            # Menú principal
+            print("\nSeleccione el servicio que desea crear:")
+            print("1. Reserva de Sala")
+            print("2. Alquiler de Equipo")
+            print("3. Asesoría Especializada")
+            print("4. Salir")
 
-    # Servicio válido
-    servicio1 = Sala("Sala VIP", 2)
+            opcion = input("Ingrese una opción: ")
 
-    print(servicio1.descripcion())
-    print("Costo:", servicio1.calcular_costo())
+            # Opción para salir del programa
+            if opcion == "4":
+                print("Programa finalizado.")
+                break
 
-    # Servicio válido con descuento
-    print("Costo con descuento:",
-          calcular_costo_descuento(servicio1, 0.2))
+            # OPCIÓN 1: SERVICIO DE SALA
+            if opcion == "1":
+                nombre = input("Ingrese el nombre de la sala: ")
+                horas = int(input("Ingrese el número de horas: "))
 
-except ServicioError as e:
+                servicio = Sala(nombre, horas)
 
-    # Registro del error en log.txt
-    logging.error(e)
+            # OPCIÓN 2: SERVICIO DE EQUIPO
+            elif opcion == "2":
+                nombre = input("Ingrese el nombre del equipo: ")
+                dias = int(input("Ingrese el número de días: "))
 
-    print(e)
+                servicio = Equipo(nombre, dias)
 
+            # OPCIÓN 3: SERVICIO DE ASESORÍA
+            elif opcion == "3":
+                nombre = input("Ingrese el nombre de la asesoría: ")
+                horas = int(input("Ingrese el número de horas: "))
 
-try:
+                servicio = Asesoria(nombre, horas)
 
-    # Error: horas negativas
-    servicio2 = Sala("Sala Principal", -1)
+            # OPCIÓN INVÁLIDA
+            else:
+                print("Error: Opción no válida.")
+                continue
 
-except ServicioError as e:
+            # Mostrar información del servicio creado
+            print("\nServicio creado correctamente.")
+            print(servicio.descripcion())
+            print("Costo total:", servicio.calcular_costo())
 
-    logging.error(e)
+            # Preguntar si desea aplicar descuento
+            aplicar = input("¿Desea aplicar descuento? (s/n): ").lower()
 
-    print(e)
+            if aplicar == "s":
+                descuento = float(
+                    input("Ingrese el descuento (ejemplo 0.2 para 20%): ")
+                )
 
+                total_descuento = calcular_costo_descuento(
+                    servicio, descuento
+                )
 
-try:
+                print("Costo con descuento:", total_descuento)
 
-    # Error: nombre vacío
-    servicio3 = Equipo("", 3)
+        except ValueError:
+            # Error cuando el usuario digita texto donde se
+            # esperaba un número
+            logging.error("Error: Se esperaba un valor numérico.")
+            print("Error: Debe ingresar un valor numérico.")
 
-except ServicioError as e:
+        except ServicioError as e:
+            # Error generado por las validaciones del sistema
+            logging.error(e)
+            print(e)
 
-    logging.error(e)
-
-    print(e)
-
-
-try:
-
-    # Servicio válido
-    servicio4 = Asesoria("Marketing", 3)
-
-    print(servicio4.descripcion())
-    print("Costo:", servicio4.calcular_costo())
-
-except ServicioError as e:
-
-    logging.error(e)
-
-    print(e)
+        except Exception as e:
+            # Captura cualquier otro error inesperado
+            logging.error(e)
+            print("Error inesperado:", e)
